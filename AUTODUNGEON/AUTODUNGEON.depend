@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1645733256 source:d:\documents\programming\chatroom\autodungeon\autodungeon\main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	<time.h>
+	"autodungeon.h"
+
+1645733402 d:\documents\programming\chatroom\autodungeon\autodungeon\autodungeon.h
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	<time.h>
+
+1645733327 source:d:\documents\programming\chatroom\autodungeon\autodungeon\roommaker.c
+	"autodungeon.h"
+
