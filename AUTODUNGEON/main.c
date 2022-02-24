@@ -8,7 +8,6 @@ code by tanzytechgem
     last modified 2/24/22
 */
 
-
 int main(void)
 {
     struct Weapon trainSword = {"Training Sword", 1, 50};
@@ -19,7 +18,6 @@ int main(void)
     scanf("%s", p1.name);
 
     listStats(p1);
-
 
     return 0;
 }
