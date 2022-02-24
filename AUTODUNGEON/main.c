@@ -30,5 +30,4 @@ void listStats(struct Character player)
 {
     printf("\nYour stats are currently:\n");
     printf("Name: %s\nHealth: %d\nArmor: %d\nWeapon: %s\n  Total Damage: %d\n", player.name, player.health, player.armor, player.sword.weaponName, (player.damage + player.sword.plusDamage));
-
 }

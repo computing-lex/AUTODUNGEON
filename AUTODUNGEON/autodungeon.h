@@ -31,9 +31,16 @@ struct Room {
     double enemyChance;
 };
 
+// Generates a new room based on user imput
 void roomMaker(struct Room newRoom);
+
+// Lists the player's current stats
 void listStats(struct Character player);
+
+// Clears the command window
 void clearscr(void);
+
+// Pauses for 1 second to allow user to get feedback
 void loadBuff(int confirm);
 
 #endif // AUTODUNGEON_H_INCLUDED
