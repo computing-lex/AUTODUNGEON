@@ -3,7 +3,7 @@
 /*
 AUTO-DUNGEON!
 
-code by tanzytechgem
+code by tanzdoesthings
     created 2/22/22
     last modified 2/24/22
 */

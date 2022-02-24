@@ -1,3 +1,5 @@
+#include "autodungeon.h"
+
 /*
 Found on stackoverflow at https://stackoverflow.com/a/18154608
 */
