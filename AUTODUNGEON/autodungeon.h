@@ -33,5 +33,7 @@ struct Room {
 
 void roomMaker(struct Room newRoom);
 void listStats(struct Character player);
+void clearscr(void);
+void loadBuff(int confirm);
 
 #endif // AUTODUNGEON_H_INCLUDED

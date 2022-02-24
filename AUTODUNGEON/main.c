@@ -12,12 +12,16 @@ int main(void)
 {
     struct Weapon trainSword = {"Training Sword", 1, 50};
     struct Character p1 = {"", 25, 0, 1, trainSword, false};
+    struct Room base;
 
 
     printf("What is your name?\n");
     scanf("%s", p1.name);
 
     listStats(p1);
+    loadBuff(0);
+
+    roomMaker(base);
 
     return 0;
 }

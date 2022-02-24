@@ -1,17 +1,18 @@
 # depslib dependency file v1.0
-1645733256 source:d:\documents\programming\chatroom\autodungeon\autodungeon\main.c
-	<stdio.h>
-	<stdlib.h>
-	<stdbool.h>
-	<time.h>
+1645736103 source:d:\documents\programming\chatroom\autodungeon\autodungeon\main.c
 	"autodungeon.h"
 
-1645733402 d:\documents\programming\chatroom\autodungeon\autodungeon\autodungeon.h
+1645735838 d:\documents\programming\chatroom\autodungeon\autodungeon\autodungeon.h
 	<stdio.h>
 	<stdlib.h>
 	<stdbool.h>
 	<time.h>
 
-1645733327 source:d:\documents\programming\chatroom\autodungeon\autodungeon\roommaker.c
+1645735993 source:d:\documents\programming\chatroom\autodungeon\autodungeon\roommaker.c
+	"autodungeon.h"
+
+1645735439 source:d:\documents\programming\chatroom\autodungeon\autodungeon\clearscr.c
+
+1645736126 source:d:\documents\programming\chatroom\autodungeon\autodungeon\loadbuff.c
 	"autodungeon.h"
 
