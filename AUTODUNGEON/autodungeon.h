@@ -39,7 +39,10 @@ void roomMaker(struct Room newRoom);
 void roomDescriber(struct Room thisRoom);
 
 // Exports a room to the given file. 
-void roomExport(struct Room saveRoom, FILE *roomPoint, char[32] fileName)
+void roomExport(struct Room saveRoom, FILE *roomPoint, char[32] fileName);
+
+// Creates a new character based on user input
+void characterMaker(struct Character newCharacter);
 
 // Lists the player's current stats
 void listStats(struct Character player);
