@@ -38,6 +38,9 @@ void roomMaker(struct Room newRoom);
 // Lists the information about a given room
 void roomDescriber(struct Room thisRoom);
 
+// Exports a room to the given file. 
+void roomExport(struct Room saveRoom, FILE *roomPoint, char[32] fileName)
+
 // Lists the player's current stats
 void listStats(struct Character player);
 

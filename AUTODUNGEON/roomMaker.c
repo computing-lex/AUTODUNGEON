@@ -2,12 +2,9 @@
 
 void roomMaker(struct Room newRoom)
 {
-    // FILE *fp;
     int menuChoice = 0;
     int menuChoice2 = 0;
-
-    // Open file to apphend
-    // fp = fopen("roomList.txt", "a");
+    char roomFile[32];
 
     do {
         clearscr();
@@ -130,8 +127,14 @@ void roomMaker(struct Room newRoom)
         case 1:
             // List room information
             roomDescriber(newRoom);
+            break;
         case 2:
             // Write to file
+            printf("Please enter a filename ending in '.txt'\nIf you don't, something bad will happen. I don't know what yet.");
+            scanf("%s", roomFile);
+
+            roomExport(newRoom, roomFile);
+            break;
         case 3:
             // Quit the function
             printf("\n\nQuitting...");
@@ -149,4 +152,17 @@ void roomDescriber(struct Room thisRoom)
         Room Size: %i\nDoor Count: %i\nRoom spawn chance: %d\nEnemy spawn chance: %d\nMax Enemies: %i\n",
         &thisRoom.roomTitle, &thisRoom.roomDescription, &thisRoom.roomSize, &thisRoom.doorCount, &thisRoom.spawnChance,
         &thisRoom.enemyChance, &thisRoom.maxEnemies);
+}
+
+void roomExport(struct Room saveRoom, char[32] fileName)
+{
+    // fileName MUST have .txt at the end or bad things happen.
+    // Find a way to check for that, or even add it with a function.
+
+    FILE *roomPoint = fopen(fileName, "w");
+    fprintf(roomPoint, "Reviewing room.\n%s\nDescription:\n\t%s\n\n
+        Room Size: %i\nDoor Count: %i\nRoom spawn chance: %d\nEnemy spawn chance: %d\nMax Enemies: %i\n",
+        &saveRoom.roomTitle, &saveRoom.roomDescription, &saveRoom.roomSize, &saveRoom.doorCount, &saveRoom.spawnChance,
+        &saveRoom.enemyChance, &saveRoom.maxEnemies);
+    fclose(fileName);
 }
