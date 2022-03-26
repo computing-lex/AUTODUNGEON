@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 #include <time.h>
 
 #ifndef AUTODUNGEON_H_INCLUDED
@@ -33,6 +34,9 @@ struct Room {
 
 // Generates a new room based on user imput
 void roomMaker(struct Room newRoom);
+
+// Lists the information about a given room
+void roomDescriber(struct Room thisRoom);
 
 // Lists the player's current stats
 void listStats(struct Character player);

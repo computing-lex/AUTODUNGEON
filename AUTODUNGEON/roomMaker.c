@@ -109,6 +109,7 @@ void roomMaker(struct Room newRoom)
                 break;
             case 4:
                 // Review Room
+                roomDescriber(newRoom);
             case 5:
                 // Quit
                 printf("Continuing to quit menu...");
@@ -128,6 +129,7 @@ void roomMaker(struct Room newRoom)
         {
         case 1:
             // List room information
+            roomDescriber(newRoom);
         case 2:
             // Write to file
         case 3:
@@ -139,4 +141,12 @@ void roomMaker(struct Room newRoom)
             break;
         }
     } while (menuChoice != 3);
+}
+
+void roomDescriber(struct Room thisRoom)
+{
+    printf("Reviewing room.\n%s\nDescription:\n\t%s\n\n
+        Room Size: %i\nDoor Count: %i\nRoom spawn chance: %d\nEnemy spawn chance: %d\nMax Enemies: %i\n",
+        &thisRoom.roomTitle, &thisRoom.roomDescription, &thisRoom.roomSize, &thisRoom.doorCount, &thisRoom.spawnChance,
+        &thisRoom.enemyChance, &thisRoom.maxEnemies);
 }
