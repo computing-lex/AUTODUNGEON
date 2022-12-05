@@ -9,6 +9,15 @@ public class Player extends Entity {
         setLocation(new int[] {5, 5});
     }
 
+    public int playerMenu() {
+        int playerChoice = 0;
+
+        System.out.println("Make your decision...");
+        System.out.println("");
+
+        return playerChoice;
+    }
+
     public int autoMove() {
         int move = 0;
 

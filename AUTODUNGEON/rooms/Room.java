@@ -20,11 +20,11 @@ public class Room {
     
     private Chest loot;
 
-    public Room() {
-        generateRoom();
+    public Room(int level) {
+        generateRoom(level);
     }
 
-    public void generateRoom() {
+    public void generateRoom(int level) {
         setDoors(4);
         
         doorStates = new boolean[] {true, true, true, true};
@@ -32,7 +32,7 @@ public class Room {
 
         enemies = new Enemy[enemyCount];
         for (int i = 0; i < enemyCount; i++) {
-            enemies[i] = new Enemy();
+            enemies[i] = new Enemy(level);
         }
 
         loot = new Chest();
@@ -69,6 +69,8 @@ public class Room {
         for (int i = 0; i < doorStates.length; i++) {
             if (doorStates[i]) {
                 System.out.println(i + ": " + doorToString(i));
+            } else {
+                System.out.println("X: Locked");
             }
         }
     }

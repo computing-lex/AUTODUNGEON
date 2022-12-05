@@ -18,7 +18,12 @@ public class DungeonController {
     public void update() {
         for (int i = 0; i < 50; i++) {
             movePlayer();
+
         }
+    }
+    
+    public void battle() {
+        
     }
 
     public void movePlayer() {
@@ -68,7 +73,7 @@ public class DungeonController {
         rooms = new LinkedList<LinkedList<Room>>();
         rooms.add(0, new LinkedList<Room>());
         
-        rooms.get(0).add(new Room());
+        rooms.get(0).add(new Room(player.getLevel()));
     }
 
     private void buildRoom(int[] location) {
@@ -80,7 +85,7 @@ public class DungeonController {
 
         if (rooms.get(location[0]).size() - 1 < location[1]) {
             for (int i = rooms.get(location[0]).size() - 1; i < location[1]; i++) {
-                rooms.get(location[0]).add(new Room());
+                rooms.get(location[0]).add(new Room(player.getLevel()));
             }
         }
     }

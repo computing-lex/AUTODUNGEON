@@ -78,4 +78,8 @@ public class Level {
 
         return rand;
     }
+
+    public int getLevel() {
+        return level;
+    }
 }
