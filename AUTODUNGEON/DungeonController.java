@@ -1,12 +1,12 @@
 package AUTODUNGEON;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import AUTODUNGEON.entities.Player;
 import AUTODUNGEON.rooms.*;
 
 public class DungeonController {
 
-    private ArrayList<ArrayList<Room>> rooms;
+    private LinkedList<LinkedList<Room>> rooms;
     private Player player;
 
     public DungeonController() {
@@ -59,25 +59,32 @@ public class DungeonController {
     }
 
     private void generateRooms() {
-        rooms = new ArrayList<ArrayList<Room>>();
-        rooms.add(0, new ArrayList<Room>());
+        rooms = new LinkedList<LinkedList<Room>>();
+        rooms.add(0, new LinkedList<Room>());
         
         rooms.get(0).add(new Room());
     }
 
     private void buildRoom(int[] location) {
-        if (rooms.get(location[0]) == null) {
-            rooms.add(location[0], new ArrayList<Room>());
+        if (rooms.size() - 1 < location[0]) {
+            for (int i = rooms.size() - 1; i < location[0]; i++) {
+                rooms.add(new LinkedList<Room>());
+            }
         }
 
-        if (rooms.get(location[0]).get(location[1]) == null) {
-            rooms.get(location[0]).add(location[1], new Room());
+        if (rooms.get(location[0]).size() - 1 < location[1]) {
+            for (int i = rooms.get(location[0]).size() - 1; i < location[1]; i++) {
+                rooms.get(location[0]).add(new Room());
+            }
         }
     }
 
     private void setPosition(int[] location) {
-        if (rooms.get(location[0]).get(location[1]) != null) {
-            player.setLocation(location);
+
+        if (rooms.size() > location[0]) {
+            if (rooms.get(location[0]).size() > location[1]) {
+                player.setLocation(location);
+            }
         } else if (location[0] > 0 && location[1] > 0) {
             buildRoom(location);
             player.setLocation(location);
