@@ -1,6 +1,7 @@
 package AUTODUNGEON.entities;
 
 import java.util.Scanner;
+import AUTODUNGEON.rooms.Room;
 
 public class Player extends Entity {
     public Player() {
@@ -16,14 +17,21 @@ public class Player extends Entity {
         return move;
     }
 
-    public int move() {
+    public int move(Room currentRoom) {
         Scanner in = new Scanner(System.in);
         int move = 0;
 
         System.out.println("Pick a door to enter: ");
-        System.out.print("0: North\n1: East\n2: South\n3: West\n");
-        
+        currentRoom.printDoorStates();
+
         move = in.nextInt();
+        
+        while (!currentRoom.checkDoor(move)) {
+            System.out.println("Please pick a different door: ");
+            move = in.nextInt();
+        }
+        
+        in.close();
 
         return move;
     }

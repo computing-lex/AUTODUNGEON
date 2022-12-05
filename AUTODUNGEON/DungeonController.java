@@ -23,7 +23,7 @@ public class DungeonController {
 
     public void movePlayer() {
 
-        int playerChoice = player.move();
+        int playerChoice = player.move(rooms.get(player.getLocation()[0]).get(player.getLocation()[1]));
 
         setPosition(getRoomPosition(playerChoice));
         System.out.println("Moved to: " + player.getLocation()[0] + ", " + player.getLocation()[1] + " through the " + rooms.get(0).get(0).doorToString(playerChoice) + " door.");
