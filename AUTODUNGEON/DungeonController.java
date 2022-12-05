@@ -29,11 +29,13 @@ public class DungeonController {
     private int[] getRoomPosition(int doorIndex) {
         int[] newPosition = player.getLocation();
 
+        buildRoom(newPosition);
+        
         if (rooms.get(player.getLocation()[0]).get(player.getLocation()[1]).checkDoor(doorIndex)) {
             switch (doorIndex) {
             case 0:
-                if (newPosition[1] - 1 > 0) {
-                    newPosition[1] = newPosition[1] - 1;
+                if (newPosition[1] - 1 >= 0) {
+                    newPosition[1]--;
                 } else {
                     newPosition[1] = 0;
                 }
@@ -45,7 +47,7 @@ public class DungeonController {
                 newPosition[1]++;
                 break;
             case 3:
-                if (newPosition[0]-- > 0) {
+                if (newPosition[0]-- >= 0) {
                     newPosition[0]--;
                 } else {
                     newPosition[0] = 0;
@@ -72,7 +74,7 @@ public class DungeonController {
             }
         }
 
-        if (rooms.get(location[0]).size() - 1 < location[1]) {
+        if (rooms.get(location[0]).size() < location[1]) {
             for (int i = rooms.get(location[0]).size() - 1; i < location[1]; i++) {
                 rooms.get(location[0]).add(new Room());
             }
@@ -85,7 +87,7 @@ public class DungeonController {
             if (rooms.get(location[0]).size() > location[1]) {
                 player.setLocation(location);
             }
-        } else if (location[0] > 0 && location[1] > 0) {
+        } else if (location[0] >= 0 && location[1] >= 0) {
             buildRoom(location);
             player.setLocation(location);
         }
