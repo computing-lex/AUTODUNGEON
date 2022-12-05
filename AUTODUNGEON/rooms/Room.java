@@ -64,4 +64,28 @@ public class Room {
 
         return state;
     }
+
+    public String doorToString(int door)  {
+        String doorString;
+        
+        switch (door) {
+            case 0:
+                doorString = "north";
+                break;
+            case 1:
+                doorString = "east";
+                break;
+            case 2:
+                doorString = "south";
+                break;
+            case 3:
+                doorString = "west";
+                break;
+            default:
+                doorString = "Invalid door.";
+                break;
+        }
+
+        return doorString;
+    }
 }

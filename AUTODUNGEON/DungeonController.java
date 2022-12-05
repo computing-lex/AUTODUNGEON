@@ -22,8 +22,11 @@ public class DungeonController {
     }
 
     public void movePlayer() {
-        setPosition(getRoomPosition(player.move()));
-        System.out.println("Moved to: " + player.getLocation()[0] + ", " + player.getLocation()[1]);
+
+        int playerChoice = player.move();
+
+        setPosition(getRoomPosition(playerChoice));
+        System.out.println("Moved to: " + player.getLocation()[0] + ", " + player.getLocation()[1] + " through the " + rooms.get(0).get(0).doorToString(playerChoice) + " door.");
     }
 
     private int[] getRoomPosition(int doorIndex) {
@@ -52,6 +55,7 @@ public class DungeonController {
                 } else {
                     newPosition[0] = 0;
                 }
+                break;
             default:
                 break;
             }
@@ -74,7 +78,7 @@ public class DungeonController {
             }
         }
 
-        if (rooms.get(location[0]).size() < location[1]) {
+        if (rooms.get(location[0]).size() - 1 < location[1]) {
             for (int i = rooms.get(location[0]).size() - 1; i < location[1]; i++) {
                 rooms.get(location[0]).add(new Room());
             }
