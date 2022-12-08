@@ -20,11 +20,11 @@ public class Room {
     
     private Chest loot;
 
-    public Room() {
-        generateRoom();
+    public Room(int level) {
+        generateRoom(level);
     }
 
-    public void generateRoom() {
+    public void generateRoom(int level) {
         setDoors(4);
         
         doorStates = new boolean[] {true, true, true, true};
@@ -32,7 +32,7 @@ public class Room {
 
         enemies = new Enemy[enemyCount];
         for (int i = 0; i < enemyCount; i++) {
-            enemies[i] = new Enemy();
+            enemies[i] = new Enemy(level);
         }
 
         loot = new Chest();
@@ -58,11 +58,21 @@ public class Room {
     /** Cardinal directions based on index: {N, E, S, W} */
     public boolean checkDoor(int door) {
         boolean state = false;
-        if (door >= 0 || door < doorStates.length) {
+        if (door >= 0 && door < 4) {
             state = doorStates[door];
         }
 
         return state;
+    }
+
+    public void printDoorStates() {
+        for (int i = 0; i < doorStates.length; i++) {
+            if (doorStates[i]) {
+                System.out.println(i + ": " + doorToString(i));
+            } else {
+                System.out.println("X: Locked");
+            }
+        }
     }
 
     public String doorToString(int door)  {
@@ -70,16 +80,16 @@ public class Room {
         
         switch (door) {
             case 0:
-                doorString = "north";
+                doorString = "North";
                 break;
             case 1:
-                doorString = "east";
+                doorString = "East";
                 break;
             case 2:
-                doorString = "south";
+                doorString = "South";
                 break;
             case 3:
-                doorString = "west";
+                doorString = "West";
                 break;
             default:
                 doorString = "Invalid door.";

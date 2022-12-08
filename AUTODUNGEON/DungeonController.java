@@ -18,12 +18,18 @@ public class DungeonController {
     public void update() {
         for (int i = 0; i < 50; i++) {
             movePlayer();
+
         }
+    }
+    
+    public void battle() {
+        
     }
 
     public void movePlayer() {
 
-        int playerChoice = player.move();
+        buildRoom(player.getLocation());
+        int playerChoice = player.move(rooms.get(player.getLocation()[0]).get(player.getLocation()[1]));
 
         setPosition(getRoomPosition(playerChoice));
         System.out.println("Moved to: " + player.getLocation()[0] + ", " + player.getLocation()[1] + " through the " + rooms.get(0).get(0).doorToString(playerChoice) + " door.");
@@ -68,7 +74,7 @@ public class DungeonController {
         rooms = new LinkedList<LinkedList<Room>>();
         rooms.add(0, new LinkedList<Room>());
         
-        rooms.get(0).add(new Room());
+        rooms.get(0).add(new Room(player.getLevel()));
     }
 
     private void buildRoom(int[] location) {
@@ -80,7 +86,7 @@ public class DungeonController {
 
         if (rooms.get(location[0]).size() - 1 < location[1]) {
             for (int i = rooms.get(location[0]).size() - 1; i < location[1]; i++) {
-                rooms.get(location[0]).add(new Room());
+                rooms.get(location[0]).add(new Room(player.getLevel()));
             }
         }
     }
