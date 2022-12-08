@@ -58,7 +58,7 @@ public class Room {
     /** Cardinal directions based on index: {N, E, S, W} */
     public boolean checkDoor(int door) {
         boolean state = false;
-        if (door >= 0 || door < 4) {
+        if (door >= 0 && door < 4) {
             state = doorStates[door];
         }
 

@@ -28,6 +28,7 @@ public class DungeonController {
 
     public void movePlayer() {
 
+        buildRoom(player.getLocation());
         int playerChoice = player.move(rooms.get(player.getLocation()[0]).get(player.getLocation()[1]));
 
         setPosition(getRoomPosition(playerChoice));

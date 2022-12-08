@@ -4,7 +4,10 @@ import java.util.Scanner;
 import AUTODUNGEON.rooms.Room;
 
 public class Player extends Entity {
+    private Scanner in;
+
     public Player() {
+        in = new Scanner(System.in);
         System.out.println("Starting at 5, 5.");
         setLocation(new int[] {5, 5});
     }
@@ -27,7 +30,6 @@ public class Player extends Entity {
     }
 
     public int move(Room currentRoom) {
-        Scanner in = new Scanner(System.in);
         int move = 0;
 
         System.out.println("Pick a door to enter: ");
@@ -40,8 +42,10 @@ public class Player extends Entity {
             move = in.nextInt();
         }
         
-        in.close();
-
         return move;
+    }
+
+    public void closeScanner() {
+        in.close();
     }
 }
