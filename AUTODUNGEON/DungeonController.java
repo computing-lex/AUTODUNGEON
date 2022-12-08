@@ -16,23 +16,53 @@ public class DungeonController {
     }
 
     public void update() {
-        for (int i = 0; i < 50; i++) {
-            movePlayer();
+        int turnCount = 0;
+
+        while (turnCount < 100) {
+            buildRoom(player.getLocation());
+            
+            while (getPlayerRoom().getEnemyCount() > 0) {
+                battle();
+            }
+
+            switch (player.playerMenu()) {
+                case 1:
+                    movePlayer();
+                    break;
+                case 2:
+                    turnCount = 100;
+                    break;
+                default:
+                    break;
+            }
+
+            turnCount++;
 
         }
     }
     
     public void battle() {
+        System.out.println("It is your turn to fight!\nThere are " + getPlayerRoom().getEnemyCount() + " enemies in the room!");
+
+        for (int i = 0; i < getPlayerRoom().getEnemies().length; i++) {
+            if (getPlayerRoom().getEnemies()[i].getHealth() > 0) {
+                System.out.println(i + ": " + getPlayerRoom().getEnemies()[i].getName());
+            }
+        }
+
         
     }
 
     public void movePlayer() {
-
-        buildRoom(player.getLocation());
-        int playerChoice = player.move(rooms.get(player.getLocation()[0]).get(player.getLocation()[1]));
+        
+        int playerChoice = player.move(getPlayerRoom());
 
         setPosition(getRoomPosition(playerChoice));
         System.out.println("Moved to: " + player.getLocation()[0] + ", " + player.getLocation()[1] + " through the " + rooms.get(0).get(0).doorToString(playerChoice) + " door.");
+    }
+
+    private Room getPlayerRoom() {
+        return rooms.get(player.getLocation()[0]).get(player.getLocation()[1]);
     }
 
     private int[] getRoomPosition(int doorIndex) {
@@ -40,7 +70,7 @@ public class DungeonController {
 
         buildRoom(newPosition);
         
-        if (rooms.get(player.getLocation()[0]).get(player.getLocation()[1]).checkDoor(doorIndex)) {
+        if (getPlayerRoom().checkDoor(doorIndex)) {
             switch (doorIndex) {
             case 0:
                 if (newPosition[1] - 1 >= 0) {

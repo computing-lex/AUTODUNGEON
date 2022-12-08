@@ -2,6 +2,7 @@ package AUTODUNGEON.entities;
 
 import AUTODUNGEON.Level;
 import AUTODUNGEON.items.Weapon;
+import AUTODUNGEON.rooms.Room;
 
 public abstract class Entity {
     private String name;
@@ -23,7 +24,7 @@ public abstract class Entity {
         setValues();
     }
 
-    public void takeTurn() {
+    public void takeTurn(Room currentRoom) {
         
     }
 
@@ -43,6 +44,16 @@ public abstract class Entity {
 
     public void attack() {
         weapon.attack(target);
+    }
+
+    public boolean isDead() {
+        boolean isDead = false;
+        
+        if (health <= 0) {
+            isDead = true;
+        }
+
+        return isDead;
     }
 
     protected void setLevel(int newLevel) {

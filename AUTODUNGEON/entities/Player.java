@@ -1,6 +1,7 @@
 package AUTODUNGEON.entities;
 
 import java.util.Scanner;
+
 import AUTODUNGEON.rooms.Room;
 
 public class Player extends Entity {
@@ -15,10 +16,30 @@ public class Player extends Entity {
     public int playerMenu() {
         int playerChoice = 0;
 
-        System.out.println("Make your decision...");
-        System.out.println("");
+        System.out.println("\nMake your decision...");
+        System.out.println("1: Move\n2: Quit");
+
+        playerChoice = in.nextInt();
+
+        while (playerChoice < 1 || playerChoice > 2) {
+            System.out.println("Invalid choice. Please try again. ");
+            System.out.println("Make your decision...");
+            System.out.println("1: Move\n2: Quit");
+            playerChoice = in.nextInt();
+        }
 
         return playerChoice;
+    }
+
+    @Override
+    public void takeTurn(Room currentRoom) {
+        System.out.println("It is your turn to fight!\nThere are " + currentRoom.getEnemyCount() + " enemies in the room!");
+
+        for (int i = 0; i < currentRoom.getEnemies().length; i++) {
+            if (currentRoom.getEnemies()[i].getHealth() > 0) {
+                System.out.println(i + ": " + currentRoom.getEnemies()[i].getName());
+            }
+        }
     }
 
     public int autoMove() {

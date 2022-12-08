@@ -1,5 +1,7 @@
 package AUTODUNGEON.entities;
 
+import AUTODUNGEON.rooms.Room;
+
 public class Enemy extends Entity {
     
     public Enemy() {
@@ -13,7 +15,7 @@ public class Enemy extends Entity {
     }
 
     @Override
-    public void takeTurn() {
+    public void takeTurn(Room currentRoom) {
         
     }
 }
