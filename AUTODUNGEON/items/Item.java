@@ -11,15 +11,21 @@ public class Item {
 
     public Item() {
         level = new Level();
+        setDamage();
     }   
 
     public Item(Effect effect) {
         genericEffect = effect;
         level = new Level();
+        setDamage();
     }
 
     public Item(int newLevel) {
         level = new Level(newLevel);
+    }
+
+    private void setDamage() {
+        damage = level.damage();
     }
     
     // Get / Set
@@ -39,7 +45,7 @@ public class Item {
 
     public void attack(Entity target) {
         target.takeDamage(damage);
-        System.out.println("Attacked " + target.getName() + " for " + damage + " damage!");
+        System.out.println("Attacked " + target.getName() + " for " + damage + " damage!\n");
     }
     
 }

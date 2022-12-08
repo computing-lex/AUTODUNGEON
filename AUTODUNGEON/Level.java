@@ -53,7 +53,7 @@ public class Level {
 
     /** Generate possible range of damage values. */
     private void setDamageRange() {
-        int base = level;
+        int base = level * 3;
 
         damageRange = new int[2];
         damageRange[0] = base - (int) Math.ceil(Math.random() * Math.ceil(level / 2));

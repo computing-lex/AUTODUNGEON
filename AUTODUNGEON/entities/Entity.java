@@ -93,6 +93,10 @@ public abstract class Entity {
     public int getHealth() {
         return health;
     }
+    
+    protected void setName(String newName) {
+        name = newName;
+    }
 
     public void setLocation(int[] newLocation) {
         location = newLocation;

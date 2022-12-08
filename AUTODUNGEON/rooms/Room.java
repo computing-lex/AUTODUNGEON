@@ -29,15 +29,18 @@ public class Room {
         setDoors(4);
         
         doorStates = new boolean[] {true, true, true, true};
+
+        loot = new Chest();
+
+    }
+
+    public void generateEnemies(Entity target) {
         enemyCount = 2;
 
         enemies = new Enemy[enemyCount];
         for (int i = 0; i < enemyCount; i++) {
-            enemies[i] = new Enemy(level);
+            enemies[i] = new Enemy(target, target.getLevel());
         }
-
-        loot = new Chest();
-
     }
 
     public int getEnemyCount() {

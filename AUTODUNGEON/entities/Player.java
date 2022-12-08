@@ -9,8 +9,17 @@ public class Player extends Entity {
 
     public Player() {
         in = new Scanner(System.in);
+        
+        setPlayerName();
+
         System.out.println("Starting at 5, 5.");
         setLocation(new int[] {5, 5});
+    }
+
+    public void setPlayerName() {
+        System.out.println("Please enter your name: ");
+
+        setName(in.nextLine());
     }
 
     public int playerMenu() {
@@ -37,9 +46,20 @@ public class Player extends Entity {
 
         for (int i = 0; i < currentRoom.getEnemies().length; i++) {
             if (currentRoom.getEnemies()[i].getHealth() > 0) {
-                System.out.println(i + ": " + currentRoom.getEnemies()[i].getName());
+                System.out.println(i + ": " + currentRoom.getEnemies()[i].getName() + " ( " + currentRoom.getEnemies()[i].getHealth() + " )");
             }
         }
+
+        int playerChoice = in.nextInt();
+
+        while (playerChoice < 0 || playerChoice > currentRoom.getEnemies().length) {
+            System.out.println("Invalid choice. Please choose from the list above. ");
+            playerChoice = in.nextInt();
+        }
+
+        setTarget(currentRoom.getEnemies()[playerChoice]);
+
+        attack();
     }
 
     public int autoMove() {

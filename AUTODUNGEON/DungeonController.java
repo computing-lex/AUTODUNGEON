@@ -1,6 +1,8 @@
 package AUTODUNGEON;
 
 import java.util.LinkedList;
+
+import AUTODUNGEON.entities.Entity;
 import AUTODUNGEON.entities.Player;
 import AUTODUNGEON.rooms.*;
 
@@ -21,11 +23,15 @@ public class DungeonController {
         while (turnCount < 100) {
             buildRoom(player.getLocation());
             
-            while (getPlayerRoom().getEnemyCount() > 0) {
+            while (getPlayerRoom().getEnemyCount() > 0 && player.getHealth() > 0) {
                 battle();
             }
 
-            switch (player.playerMenu()) {
+            if (player.getHealth() <= 0) {
+                turnCount = 100;
+                System.out.println("You died!");
+            } else {
+                switch (player.playerMenu()) {
                 case 1:
                     movePlayer();
                     break;
@@ -34,23 +40,24 @@ public class DungeonController {
                     break;
                 default:
                     break;
+                }
+
+                turnCount++;
+            
+                if (turnCount % 10 == 0) {
+                    player.levelUp();
+                }
             }
-
-            turnCount++;
-
         }
     }
     
     public void battle() {
-        System.out.println("It is your turn to fight!\nThere are " + getPlayerRoom().getEnemyCount() + " enemies in the room!");
-
-        for (int i = 0; i < getPlayerRoom().getEnemies().length; i++) {
-            if (getPlayerRoom().getEnemies()[i].getHealth() > 0) {
-                System.out.println(i + ": " + getPlayerRoom().getEnemies()[i].getName());
+        player.takeTurn(getPlayerRoom());
+        for (Entity e : getPlayerRoom().getEnemies()) {
+            if (!e.isDead()) {
+                e.takeTurn(getPlayerRoom());
             }
         }
-
-        
     }
 
     public void movePlayer() {
@@ -119,6 +126,8 @@ public class DungeonController {
                 rooms.get(location[0]).add(new Room(player.getLevel()));
             }
         }
+
+        getPlayerRoom().generateEnemies(player);
     }
 
     private void setPosition(int[] location) {
