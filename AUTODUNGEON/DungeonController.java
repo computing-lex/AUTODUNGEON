@@ -52,6 +52,7 @@ public class DungeonController {
     }
     
     public void battle() {
+        player.printStats();
         player.takeTurn(getPlayerRoom());
         for (Entity e : getPlayerRoom().getEnemies()) {
             if (!e.isDead()) {

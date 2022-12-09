@@ -1,5 +1,10 @@
 package AUTODUNGEON.entities;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.LinkedList;
+import java.util.Scanner;
+
 import AUTODUNGEON.Level;
 import AUTODUNGEON.items.Weapon;
 import AUTODUNGEON.rooms.Room;
@@ -13,15 +18,39 @@ public abstract class Entity {
     private Weapon weapon;
     private Level level;
     private Entity target;
+    private Scanner in;
 
     private int[] location;
 
     public Entity() {
         level = new Level();
-        name = "Empty Name";
+        name = generateName();
 
         weapon = new Weapon();
         setValues();
+    }
+
+    private String generateName() {
+        File names = new File("names.dat");
+        String name = "Default";
+        
+        try {
+            LinkedList<String> lines = new LinkedList<String>();
+            in = new Scanner(names);
+
+            while(in.hasNextLine()) {
+                lines.add(in.nextLine());
+            }
+
+            name = lines.get((int) Math.floor(Math.random() * lines.size()));
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        
+        
+
+        return name;
     }
 
     public void takeTurn(Room currentRoom) {
@@ -44,6 +73,11 @@ public abstract class Entity {
 
     public void attack() {
         weapon.attack(target);
+    }
+
+    protected void setMaxHealth(int newHealth) {
+        maxHealth = newHealth;
+        health = maxHealth;
     }
 
     public boolean isDead() {
@@ -92,6 +126,10 @@ public abstract class Entity {
 
     public int getHealth() {
         return health;
+    }
+
+    public Weapon getWeapon() {
+        return weapon;
     }
     
     protected void setName(String newName) {

@@ -28,6 +28,10 @@ public class Item {
         damage = level.damage();
     }
     
+    protected void setDamage(int newDamage) {
+        damage = newDamage;
+    }
+
     // Get / Set
     public int getDamage() {
         return damage;
@@ -45,7 +49,7 @@ public class Item {
 
     public void attack(Entity target) {
         target.takeDamage(damage);
-        System.out.println("Attacked " + target.getName() + " for " + damage + " damage!\n");
+        System.out.println("Attacked " + target.getName() + " for " + damage + " damage!");
     }
     
 }

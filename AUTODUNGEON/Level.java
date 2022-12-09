@@ -56,8 +56,8 @@ public class Level {
         int base = level * 3;
 
         damageRange = new int[2];
-        damageRange[0] = base - (int) Math.ceil(Math.random() * Math.ceil(level / 2));
-        damageRange[1] = base + (int) Math.ceil(Math.random() * Math.ceil(level / 2));
+        damageRange[0] = base - (int) Math.ceil(Math.random() * Math.ceil(level));
+        damageRange[1] = base + (int) Math.ceil(Math.random() * Math.ceil(level));
     }
 
     // Set values from ranges

@@ -9,7 +9,7 @@ public class Player extends Entity {
 
     public Player() {
         in = new Scanner(System.in);
-        
+
         setPlayerName();
 
         System.out.println("Starting at 5, 5.");
@@ -42,17 +42,17 @@ public class Player extends Entity {
 
     @Override
     public void takeTurn(Room currentRoom) {
-        System.out.println("It is your turn to fight!\nThere are " + currentRoom.getEnemyCount() + " enemies in the room!");
+        System.out.println("\nIt is your turn to fight!\nThere are " + currentRoom.getEnemyCount() + " enemies in the room!");
 
         for (int i = 0; i < currentRoom.getEnemies().length; i++) {
             if (currentRoom.getEnemies()[i].getHealth() > 0) {
-                System.out.println(i + ": " + currentRoom.getEnemies()[i].getName() + " ( " + currentRoom.getEnemies()[i].getHealth() + " )");
+                System.out.println("\t" + i + ": " + currentRoom.getEnemies()[i].getName() + " ( " + currentRoom.getEnemies()[i].getHealth() + " )");
             }
         }
 
         int playerChoice = in.nextInt();
 
-        while (playerChoice < 0 || playerChoice > currentRoom.getEnemies().length) {
+        while (playerChoice < 0 || playerChoice > currentRoom.getEnemies().length - 1) {
             System.out.println("Invalid choice. Please choose from the list above. ");
             playerChoice = in.nextInt();
         }
@@ -60,6 +60,14 @@ public class Player extends Entity {
         setTarget(currentRoom.getEnemies()[playerChoice]);
 
         attack();
+    }
+
+    public void printStats() {
+        System.out.println("\n---------------------");
+        System.out.println("You are " + getName());
+        System.out.println("Health: " + getHealth() + "/" + getMaxHealth());
+        System.out.println("Damage: " + getWeapon().getDamage());
+        System.out.println("---------------------");
     }
 
     public int autoMove() {
@@ -73,7 +81,7 @@ public class Player extends Entity {
     public int move(Room currentRoom) {
         int move = 0;
 
-        System.out.println("Pick a door to enter: ");
+        System.out.println("\nPick a door to enter: ");
         currentRoom.printDoorStates();
 
         move = in.nextInt();
