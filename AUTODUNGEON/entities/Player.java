@@ -9,6 +9,7 @@ public class Player extends Entity {
 
     public Player() {
         in = new Scanner(System.in);
+        setPlayerWeapon();
 
         setPlayerName();
 

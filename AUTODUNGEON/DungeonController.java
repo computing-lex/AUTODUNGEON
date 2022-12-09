@@ -11,6 +11,12 @@ public class DungeonController {
     private LinkedList<LinkedList<Room>> rooms;
     private Player player;
 
+    public static void main(String[] args) {
+        DungeonController dungeon = new DungeonController();
+
+        dungeon.update();
+    }
+
     public DungeonController() {
         player = new Player();
         generateRooms();

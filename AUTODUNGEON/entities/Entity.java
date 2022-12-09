@@ -90,6 +90,10 @@ public abstract class Entity {
         return isDead;
     }
 
+    public void setPlayerWeapon() {
+        weapon.playerWeapon();
+    }
+
     protected void setLevel(int newLevel) {
         level = new Level(newLevel);
     }
