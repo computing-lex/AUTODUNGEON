@@ -135,6 +135,10 @@ public abstract class Entity {
     public Weapon getWeapon() {
         return weapon;
     }
+
+    public void setWeapon(Weapon newWeapon) {
+        weapon = newWeapon;
+    }
     
     protected void setName(String newName) {
         name = newName;

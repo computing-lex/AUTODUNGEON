@@ -80,7 +80,7 @@ public class Room {
         return doorCount;
     }
 
-    public Item[] loot() {
+    public Item loot() {
         return loot.getLoot();
     }
 

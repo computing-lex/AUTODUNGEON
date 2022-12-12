@@ -4,6 +4,8 @@ import java.util.LinkedList;
 
 import AUTODUNGEON.entities.Entity;
 import AUTODUNGEON.entities.Player;
+import AUTODUNGEON.items.Item;
+import AUTODUNGEON.items.Weapon;
 import AUTODUNGEON.rooms.*;
 
 public class DungeonController {
@@ -37,6 +39,11 @@ public class DungeonController {
                 turnCount = 100;
                 System.out.println("You died!");
             } else {
+                
+                if (getPlayerRoom().loot() instanceof Weapon) {
+                    player.setWeapon(getPlayerRoom().loot());
+                }
+
                 switch (player.playerMenu()) {
                 case 1:
                     movePlayer();
