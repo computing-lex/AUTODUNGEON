@@ -11,17 +11,27 @@ public class Item {
 
     public Item() {
         level = new Level();
+        setDamage();
     }   
 
     public Item(Effect effect) {
         genericEffect = effect;
         level = new Level();
+        setDamage();
     }
 
     public Item(int newLevel) {
         level = new Level(newLevel);
     }
+
+    private void setDamage() {
+        damage = level.damage();
+    }
     
+    protected void setDamage(int newDamage) {
+        damage = newDamage;
+    }
+
     // Get / Set
     public int getDamage() {
         return damage;

@@ -1,6 +1,7 @@
 package AUTODUNGEON.rooms;
 
 import AUTODUNGEON.entities.Enemy;
+import AUTODUNGEON.entities.Entity;
 import AUTODUNGEON.items.Chest;
 import AUTODUNGEON.items.Item;
 
@@ -28,15 +29,43 @@ public class Room {
         setDoors(4);
         
         doorStates = new boolean[] {true, true, true, true};
+
+        loot = new Chest();
+
+    }
+
+    public void generateEnemies(Entity target) {
         enemyCount = 2;
 
         enemies = new Enemy[enemyCount];
         for (int i = 0; i < enemyCount; i++) {
-            enemies[i] = new Enemy(level);
+            enemies[i] = new Enemy(target, target.getLevel());
         }
+    }
 
-        loot = new Chest();
+    public int getEnemyCount() {
+        int livingEnemyCount = enemyCount;
 
+        for (Entity e : enemies) {
+            if (e.isDead()) {
+                livingEnemyCount--;
+            }
+        }
+        
+        return livingEnemyCount;
+    }
+
+    public Entity[] getEnemies() {
+        return enemies;
+    }
+
+    public void enemyTurn(Entity target) {
+        for (Enemy e : enemies) {
+            if (!e.isDead()) {
+                e.setTarget(target);
+                e.takeTurn(this);
+            }
+        }
     }
 
     private void setDoors(int newDoorCount) {

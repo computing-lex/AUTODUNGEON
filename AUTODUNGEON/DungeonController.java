@@ -1,6 +1,8 @@
 package AUTODUNGEON;
 
 import java.util.LinkedList;
+
+import AUTODUNGEON.entities.Entity;
 import AUTODUNGEON.entities.Player;
 import AUTODUNGEON.rooms.*;
 
@@ -9,6 +11,12 @@ public class DungeonController {
     private LinkedList<LinkedList<Room>> rooms;
     private Player player;
 
+    public static void main(String[] args) {
+        DungeonController dungeon = new DungeonController();
+
+        dungeon.update();
+    }
+
     public DungeonController() {
         player = new Player();
         generateRooms();
@@ -16,23 +24,59 @@ public class DungeonController {
     }
 
     public void update() {
-        for (int i = 0; i < 50; i++) {
-            movePlayer();
+        int turnCount = 0;
 
+        while (turnCount < 100) {
+            buildRoom(player.getLocation());
+            
+            while (getPlayerRoom().getEnemyCount() > 0 && player.getHealth() > 0) {
+                battle();
+            }
+
+            if (player.getHealth() <= 0) {
+                turnCount = 100;
+                System.out.println("You died!");
+            } else {
+                switch (player.playerMenu()) {
+                case 1:
+                    movePlayer();
+                    break;
+                case 2:
+                    turnCount = 100;
+                    break;
+                default:
+                    break;
+                }
+
+                turnCount++;
+            
+                if (turnCount % 10 == 0) {
+                    player.levelUp();
+                }
+            }
         }
     }
     
     public void battle() {
-        
+        player.printStats();
+        player.takeTurn(getPlayerRoom());
+        for (Entity e : getPlayerRoom().getEnemies()) {
+            if (!e.isDead()) {
+                e.takeTurn(getPlayerRoom());
+            }
+        }
     }
 
     public void movePlayer() {
-
-        buildRoom(player.getLocation());
-        int playerChoice = player.move(rooms.get(player.getLocation()[0]).get(player.getLocation()[1]));
+        
+        int playerChoice = player.move(getPlayerRoom());
 
         setPosition(getRoomPosition(playerChoice));
         System.out.println("Moved to: " + player.getLocation()[0] + ", " + player.getLocation()[1] + " through the " + rooms.get(0).get(0).doorToString(playerChoice) + " door.");
+    }
+
+    private Room getPlayerRoom() {
+        return rooms.get(player.getLocation()[0]).get(player.getLocation()[1]);
     }
 
     private int[] getRoomPosition(int doorIndex) {
@@ -40,7 +84,7 @@ public class DungeonController {
 
         buildRoom(newPosition);
         
-        if (rooms.get(player.getLocation()[0]).get(player.getLocation()[1]).checkDoor(doorIndex)) {
+        if (getPlayerRoom().checkDoor(doorIndex)) {
             switch (doorIndex) {
             case 0:
                 if (newPosition[1] - 1 >= 0) {
@@ -89,6 +133,8 @@ public class DungeonController {
                 rooms.get(location[0]).add(new Room(player.getLevel()));
             }
         }
+
+        getPlayerRoom().generateEnemies(player);
     }
 
     private void setPosition(int[] location) {
