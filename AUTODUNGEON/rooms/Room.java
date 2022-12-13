@@ -2,8 +2,6 @@ package AUTODUNGEON.rooms;
 
 import AUTODUNGEON.entities.Enemy;
 import AUTODUNGEON.entities.Entity;
-import AUTODUNGEON.items.Chest;
-import AUTODUNGEON.items.Item;
 
 public class Room {
     /*
@@ -18,8 +16,6 @@ public class Room {
     
     private int enemyCount;
     private Enemy[] enemies;
-    
-    private Chest loot;
 
     public Room(int level) {
         generateRoom(level);
@@ -29,9 +25,6 @@ public class Room {
         setDoors(4);
         
         doorStates = new boolean[] {true, true, true, true};
-
-        loot = new Chest();
-
     }
 
     public void generateEnemies(Entity target) {
@@ -78,10 +71,6 @@ public class Room {
 
     public int getDoorCount() {
         return doorCount;
-    }
-
-    public Item loot() {
-        return loot.getLoot();
     }
 
     /** Cardinal directions based on index: {N, E, S, W} */

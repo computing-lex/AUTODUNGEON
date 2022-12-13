@@ -4,7 +4,6 @@ import java.util.LinkedList;
 
 import AUTODUNGEON.entities.Entity;
 import AUTODUNGEON.entities.Player;
-import AUTODUNGEON.items.Item;
 import AUTODUNGEON.items.Weapon;
 import AUTODUNGEON.rooms.*;
 
@@ -36,12 +35,15 @@ public class DungeonController {
             }
 
             if (player.getHealth() <= 0) {
+                System.out.println("You died!\nYou survived for " + turnCount + " turns!");
                 turnCount = 100;
-                System.out.println("You died!");
             } else {
                 
-                if (getPlayerRoom().loot() instanceof Weapon) {
-                    player.setWeapon(getPlayerRoom().loot());
+
+                if (Math.random() > .5) {
+                    player.heal(10*player.getLevel());
+                } else {
+                    player.heal(5*player.getLevel());
                 }
 
                 switch (player.playerMenu()) {
@@ -59,6 +61,8 @@ public class DungeonController {
             
                 if (turnCount % 10 == 0) {
                     player.levelUp();
+                    player.setWeapon(new Weapon(player.getLevel()));
+                    System.out.println("You have leveled up!\nYou found a new weapon with damage " + player.getWeapon().getDamage() + "!");
                 }
             }
         }

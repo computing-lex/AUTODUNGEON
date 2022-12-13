@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch DungeonController",
+            "request": "launch",
+            "mainClass": "AUTODUNGEON.DungeonController",
+            "projectName": "AUTODUNGEON_93c42575"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"
